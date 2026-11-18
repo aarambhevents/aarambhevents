@@ -158,6 +158,21 @@ body.locked{overflow:hidden}
 .btn.big{min-height:58px;padding:14px 26px;font-size:17px;gap:10px;position:relative;z-index:1}
 .btn.big svg{width:22px;height:22px}
 @media(max-width:700px){.offer{grid-template-columns:minmax(0,1fr)}.btn.big{width:100%}}
+.btn.zelle{background:#6d1ed4;color:#fff;gap:10px}
+.btn.zelle[aria-expanded=true]{box-shadow:0 0 0 3px rgba(109,30,212,.45)}
+.zl{display:inline-grid;place-items:center;width:24px;height:24px;border-radius:7px;background:#fff;color:#6d1ed4;font:800 15px Unbounded,sans-serif}
+.zl.big{width:44px;height:44px;border-radius:12px;font-size:24px;background:#6d1ed4;color:#fff;flex:none}
+.zpanel{margin-top:16px;border-radius:20px;padding:22px 24px;background:linear-gradient(140deg,rgba(109,30,212,.35),rgba(109,30,212,.12)),var(--tile);border:1px solid rgba(160,110,255,.6);animation:up .4s ease both}
+.zpanel[hidden]{display:none}
+.zhead{display:flex;gap:14px;align-items:center}
+.zhead h3{font-size:22px}
+.zhead p{margin:2px 0 0;color:var(--soft);font-size:15px}
+.znum{margin-top:18px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px 20px;background:rgba(0,0,0,.25);border:1px dashed rgba(200,170,255,.6);border-radius:16px;padding:14px 18px}
+.znum small{display:block;color:var(--soft);font-size:14px}
+.znum strong{font-family:Unbounded,sans-serif;font-weight:700;font-size:clamp(24px,3.4vw,32px);letter-spacing:.02em;white-space:nowrap}
+.btn.zcopy{background:#fff;color:#4b11a0;min-height:46px;padding:8px 20px;font-size:15px}
+.zsteps{margin:18px 0 18px;padding-left:22px;color:var(--soft);display:grid;gap:8px}
+.zsteps b{color:#fff;font-weight:600}
 /* motion */
 @keyframes up{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
 .hero .by,.hero h1 span,.hero .lede,.hero .when,.hero .cd,.hero .btns{animation:up .8s cubic-bezier(.2,.7,.2,1) both}
@@ -269,9 +284,19 @@ body.locked{overflow:hidden}
     <div class="buy rv">
       <a class="btn hot" href="https://www.dynodine.com/happenings/NEWYDJVXHS" target="_blank" rel="noopener">Buy on DynoDine</a>
       <a class="btn out" href="https://events.sulekha.com/new-year-s-eve-premium-party_event-in_alpharetta-ga_402532" target="_blank" rel="noopener">Buy on Sulekha</a>
-      <a class="btn wa" href="https://wa.me/16784577761" target="_blank" rel="noopener">WhatsApp 678-457-7761</a>
+      <button class="btn zelle" id="zbtn" type="button" aria-expanded="false" aria-controls="zpanel"><span class="zl" aria-hidden="true">Z</span>Pay with Zelle</button>
     </div>
-    <p class="note" id="pnote">Prices may rise with demand. VIP cabanas and regular tickets can also be paid by Zelle. Call or WhatsApp <a href="tel:+16784577761">678-457-7761</a>.</p>
+    <div class="zpanel" id="zpanel" hidden>
+      <div class="zhead"><span class="zl big" aria-hidden="true">Z</span><div><h3>Pay with Zelle</h3><p>For regular tickets and VIP Cabana Tables</p></div></div>
+      <div class="znum"><div><small>Send to this Zelle number</small><strong id="znum">678-457-7761</strong></div><button class="btn zcopy" id="zcopy" type="button">Copy number</button></div>
+      <ol class="zsteps">
+        <li>Open your <b>bank app</b> and choose <b>Zelle</b> (or the Zelle app).</li>
+        <li>Send the ticket amount to <b style="white-space:nowrap">678-457-7761</b>. In the memo, add your <b>name and tickets</b>, e.g. "Couple x1".</li>
+        <li>Send us your payment screenshot on WhatsApp so we can confirm your tickets.</li>
+      </ol>
+      <a class="btn wa" href="https://wa.me/16784577761?text=Hi%21%20I%20just%20paid%20for%20New%20Year%27s%20Eve%202027%20tickets%20by%20Zelle.%0AName%3A%0ATickets%20%28single%20/%20couple%20/%20kid-teen%20/%20group%20of%2010%20/%20VIP%20cabana%29%3A%0AQuantity%3A%0AAmount%20paid%3A" target="_blank" rel="noopener">Send payment confirmation on WhatsApp</a>
+    </div>
+    <p class="note" id="pnote">Prices may rise with demand. Questions? Call or WhatsApp <a href="tel:+16784577761">678-457-7761</a>.</p>
   </div>
 </section>
 
@@ -307,7 +332,7 @@ body.locked{overflow:hidden}
       <details><summary>Do tickets include a table?</summary><p>General Admission doesn't include a reserved table, but there's ample seating in the dining halls, some seating for the shows and a limited number of highboy tables. For your own table, book a VIP Cabana Table.</p></details>
       <details><summary>Parking and hotels?</summary><p>Parking is free during the event (cars left after 10 AM the next day may be towed). Discounted hotel rates are available to attendees.</p></details>
       <details><summary>Can I get a refund?</summary><p>Tickets are non-refundable. Early-bird pricing is available through WhatsApp until Nov 30, and prices are dynamic after that, so booking early gets the best price.</p></details>
-      <details><summary>How do I book a VIP cabana?</summary><p>Pay by Zelle, or call or WhatsApp 678-457-7761 to book.</p></details>
+      <details><summary>How do I book a VIP cabana?</summary><p>Tap "Pay with Zelle" in the Tickets section and send the amount to 678-457-7761, then share your payment screenshot on WhatsApp to confirm. Questions? Call 678-457-7761.</p></details>
     </div>
   </div>
 </section>
@@ -350,6 +375,11 @@ document.querySelectorAll('.rv').forEach((el,i)=>{el.style.transitionDelay=(el.c
 setTimeout(()=>document.querySelectorAll('.rv').forEach(el=>el.classList.add('in')),4000);
 const EBEND=new Date('2026-12-01T00:00:00-05:00').getTime(),offer=document.getElementById('offer'),ebt=document.getElementById('ebt');
 if(offer){if(Date.now()>=EBEND){offer.remove()}else{const ebTick=()=>{const ms=EBEND-Date.now();if(ms<=0){offer.remove();return}const d=Math.floor(ms/864e5),h=Math.floor(ms%864e5/36e5);ebt.textContent=d>0?`Early-bird offer · ends in ${d}d ${h}h`:`Early-bird offer · ends in ${h}h`};ebTick();setInterval(ebTick,60000)}}
+const zb=document.getElementById('zbtn'),zp=document.getElementById('zpanel'),zc=document.getElementById('zcopy');
+if(zb&&zp){zb.addEventListener('click',()=>{const open=zp.hidden;zp.hidden=!open;zb.setAttribute('aria-expanded',String(open));if(open)zp.scrollIntoView({behavior:'smooth',block:'nearest'})})}
+if(zc){zc.addEventListener('click',()=>{const n='6784577761';const done=()=>{zc.textContent='Copied!';setTimeout(()=>zc.textContent='Copy number',2000)};
+  try{navigator.clipboard.writeText(n).then(done,()=>{fb()})}catch(e){fb()}
+  function fb(){const r=document.createRange();r.selectNodeContents(document.getElementById('znum'));const s=getSelection();s.removeAllRanges();s.addRange(r);try{document.execCommand('copy');done()}catch(e){zc.textContent='Press and hold to copy'}}})}
 const au=document.getElementById('music'),mb=document.getElementById('mus'),hb=document.getElementById('snd'),ml=mb&&mb.querySelector('.ml');
 let userOff=false,fellBack=false;
 const setUI=(on,msg)=>{if(mb){mb.classList.toggle('on',on);mb.setAttribute('aria-pressed',String(on));mb.setAttribute('aria-label',on?'Pause music':'Play music');ml.textContent=msg||(on?'Music on':'Play music')}if(hb){hb.textContent=on?'Pause music':'Play music';hb.setAttribute('aria-pressed',String(on))}};
